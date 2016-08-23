@@ -5,7 +5,12 @@
  */
 package br.com.fiap.form;
 
+import br.com.fiap.dao.ClienteDAO;
+import br.com.fiap.modelo.Cliente;
+import java.sql.Date;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
@@ -162,6 +167,11 @@ public class formCliente extends javax.swing.JFrame {
 
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnPesquisar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnPesquisar.setText("Pesquisar");
@@ -246,10 +256,29 @@ public class formCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEscolherFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscolherFotoActionPerformed
-        JFileChooser file = new JFileChooser();
+        JFileChooser file = new JFileChooser("C:\\Users\\rm74395\\java-banco-2sia");
         file.showOpenDialog(this);
         caminho = file.getSelectedFile().getAbsolutePath();
+        ImageIcon imagem = new ImageIcon(caminho);
+        lblFoto.setIcon(imagem);
     }//GEN-LAST:event_btnEscolherFotoActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        String nome = txtNome.getText();
+        String endereco = txtEndereco.getText();
+        String fone = txtFone.getText();
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            Date nascimento = new Date(formato.parse(txtNascimento.getText()).getTime());
+            Cliente cliente = new Cliente(nome, endereco, nascimento, fone, caminho);
+            ClienteDAO dao = new ClienteDAO();
+            dao.inserirCliente(cliente);
+        }
+        catch(ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao gerar data de nascimento\n" + ex);
+        }
+        
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
      * @param args the command line arguments
