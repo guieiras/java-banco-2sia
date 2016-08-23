@@ -30,4 +30,8 @@ public class ClienteDAO {
              JOptionPane.showMessageDialog(null, "Erro ao inserir cliente\n"+ex);
         }
     }
+    
+    public Cliente pesquisarCliente(String nome) {
+        return null;
+    }
 }

@@ -175,6 +175,11 @@ public class formCliente extends javax.swing.JFrame {
 
         btnPesquisar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnAlterar.setText("Alterar");
@@ -279,6 +284,24 @@ public class formCliente extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        String nome = txtNome.getText();
+        ClienteDAO dao = new ClienteDAO();
+        Cliente cliente = dao.pesquisarCliente(nome);
+        if(cliente != null) {
+            JOptionPane.showMessageDialog(this, "Não foram encontrados clientes com esse termo de pesquisa: '" + nome + "'");
+        }
+        else {
+            txtNome.setText(cliente.getNome());
+            txtEndereco.setText(cliente.getEndereco());
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            txtNascimento.setText(formato.format(cliente.getNascimento()));
+            txtFone.setText(cliente.getFone());
+            ImageIcon imagem = new ImageIcon(cliente.getCaminho());
+            lblFoto.setIcon(imagem);
+        }
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
