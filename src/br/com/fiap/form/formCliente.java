@@ -6,6 +6,7 @@
 package br.com.fiap.form;
 
 import java.text.ParseException;
+import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -17,6 +18,7 @@ import javax.swing.text.MaskFormatter;
  */
 public class formCliente extends javax.swing.JFrame {
     MaskFormatter mascaraNascimento, mascaraFone;
+    String caminho;
     /**
      * Creates new form formCliente
      */
@@ -152,6 +154,11 @@ public class formCliente extends javax.swing.JFrame {
 
         btnEscolherFoto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnEscolherFoto.setText("Escolher foto");
+        btnEscolherFoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEscolherFotoActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnSalvar.setText("Salvar");
@@ -237,6 +244,12 @@ public class formCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEscolherFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscolherFotoActionPerformed
+        JFileChooser file = new JFileChooser();
+        file.showOpenDialog(this);
+        caminho = file.getSelectedFile().getAbsolutePath();
+    }//GEN-LAST:event_btnEscolherFotoActionPerformed
 
     /**
      * @param args the command line arguments
