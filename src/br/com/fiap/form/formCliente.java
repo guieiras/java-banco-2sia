@@ -5,14 +5,18 @@
  */
 package br.com.fiap.form;
 
+import java.text.ParseException;
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
  * @author selmini
  */
 public class formCliente extends javax.swing.JFrame {
-
+    MaskFormatter mascaraNascimento, mascaraFone;
     /**
      * Creates new form formCliente
      */
@@ -38,7 +42,23 @@ public class formCliente extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         txtEndereco = new javax.swing.JTextField();
         txtNascimento = new javax.swing.JFormattedTextField();
+        try {
+            mascaraNascimento = new MaskFormatter("##/##/####");
+            mascaraNascimento.setPlaceholderCharacter('_');
+            txtNascimento = new JFormattedTextField(mascaraNascimento);
+        }
+        catch(ParseException e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
         txtFone = new javax.swing.JFormattedTextField();
+        try {
+            mascaraFone = new MaskFormatter("(##) #####-####");
+            mascaraFone.setPlaceholderCharacter('_');
+            txtFone = new JFormattedTextField(mascaraFone);
+        }
+        catch(ParseException e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
         jPanel2 = new javax.swing.JPanel();
         lblFoto = new javax.swing.JLabel();
         btnEscolherFoto = new javax.swing.JButton();
@@ -52,7 +72,7 @@ public class formCliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Portal do Cliente");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Nome");
@@ -107,9 +127,9 @@ public class formCliente extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -117,7 +137,7 @@ public class formCliente extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -145,7 +165,7 @@ public class formCliente extends javax.swing.JFrame {
         btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnExcluir.setText("Excluir");
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -202,11 +222,12 @@ public class formCliente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnEscolherFoto)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSalvar)
-                    .addComponent(btnAlterar)
-                    .addComponent(btnExcluir)
-                    .addComponent(btnPesquisar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAlterar)
+                        .addComponent(btnExcluir)
+                        .addComponent(btnPesquisar)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)

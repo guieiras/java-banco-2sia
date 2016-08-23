@@ -73,11 +73,13 @@
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnSalvar" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAlterar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnAlterar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
@@ -136,9 +138,9 @@
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   <Component id="txtEndereco" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -203,6 +205,9 @@
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try {&#xd;&#xa;    mascaraNascimento = new MaskFormatter(&quot;##/##/####&quot;);&#xd;&#xa;    mascaraNascimento.setPlaceholderCharacter(&apos;_&apos;);&#xd;&#xa;    txtNascimento = new JFormattedTextField(mascaraNascimento);&#xd;&#xa;}&#xd;&#xa;catch(ParseException e) {&#xd;&#xa;    JOptionPane.showMessageDialog(this, e);&#xd;&#xa;}"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtFone">
           <Properties>
@@ -210,6 +215,9 @@
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try {&#xd;&#xa;    mascaraFone = new MaskFormatter(&quot;(##) #####-####&quot;);&#xd;&#xa;    mascaraFone.setPlaceholderCharacter(&apos;_&apos;);&#xd;&#xa;    txtFone = new JFormattedTextField(mascaraFone);&#xd;&#xa;}&#xd;&#xa;catch(ParseException e) {&#xd;&#xa;    JOptionPane.showMessageDialog(this, e);&#xd;&#xa;}"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

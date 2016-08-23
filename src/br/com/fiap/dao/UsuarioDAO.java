@@ -23,12 +23,6 @@ public class UsuarioDAO {
             return rs.next();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao pesquisar usuário\n"+ex);
-        } finally {
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao fechar conexão\n"+ex);
-            }
         }
         return false;
     } 
