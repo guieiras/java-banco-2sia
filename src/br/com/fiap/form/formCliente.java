@@ -201,6 +201,11 @@ public class formCliente extends javax.swing.JFrame {
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnExcluir.setText("Excluir");
@@ -333,7 +338,6 @@ public class formCliente extends javax.swing.JFrame {
         catch(ParseException ex) {
             JOptionPane.showMessageDialog(this, "Erro ao gerar data de nascimento\n" + ex);
         }
-        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -392,6 +396,24 @@ public class formCliente extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        String nome = txtNome.getText();
+        String endereco = txtEndereco.getText();
+        String fone = txtFone.getText();
+        try {
+            Date nascimento = new Date(formato.parse(txtNascimento.getText()).getTime());
+            Cliente cliente = new Cliente(nome, endereco, nascimento, fone, caminho);
+            ClienteDAO dao = new ClienteDAO();
+            dao.alterarCliente(cliente);
+            limparCampos();
+            JOptionPane.showMessageDialog(this, "Cliente alterado com sucesso");
+            atualizarTabela();
+        }
+        catch(ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao gerar data de nascimento\n" + ex);
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void atualizarTabela() {
         ClienteDAO dao = new ClienteDAO();

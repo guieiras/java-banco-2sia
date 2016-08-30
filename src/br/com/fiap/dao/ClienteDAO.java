@@ -34,6 +34,23 @@ public class ClienteDAO {
         }
     }
     
+    public void alterarCliente(Cliente cliente) {
+        conexao = Conexao.getConnection();
+        sql = "UPDATE POO_CLIENTE SET ENDERECO = ?, NASCIMENTO = ?, FONE = ?, CAMINHO = ? WHERE NOME = ?";
+        try {
+            p = conexao.prepareStatement(sql);   
+            p.setString(1, cliente.getEndereco());
+            p.setDate(2, cliente.getNascimento());
+            p.setString(3, cliente.getFone());
+            p.setString(4, cliente.getCaminho());
+            p.setString(5, cliente.getNome());
+            p.execute();
+        }
+        catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar dados do cliente\n"+e);
+        }        
+    }
+    
     public Cliente pesquisarCliente(String nome) {
         Cliente cliente = null;
         conexao = Conexao.getConnection();
