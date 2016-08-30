@@ -71,6 +71,19 @@ public class ClienteDAO {
         return lista;
     }
     
+    public void excluirCliente(String nome) {
+        conexao = Conexao.getConnection();
+        sql = "DELETE FROM POO_CLIENTE WHERE NOME = ?";
+        try {
+            p = conexao.prepareStatement(sql);
+            p.setString(1, nome);
+            p.execute();            
+        }
+        catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir cliente\n"+ex);
+        }
+    }
+    
     private List<Cliente> gerarLista() throws SQLException {
         List<Cliente> lista = new ArrayList<>();
         String nome, fone, endereco, caminho;

@@ -204,6 +204,11 @@ public class formCliente extends javax.swing.JFrame {
 
         btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -368,6 +373,25 @@ public class formCliente extends javax.swing.JFrame {
         this.dispose();
         new formLogin().setVisible(true);
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        String nome = txtNome.getText();
+        int confirmacao;
+        if (nome.equals("")) {
+            JOptionPane.showMessageDialog(this, "O nome do cliente deve ser informado!");
+            txtNome.requestFocus();
+        }
+        else {
+            confirmacao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir o cliente '" + nome + "'?");
+            if (confirmacao == JOptionPane.YES_OPTION) {
+                ClienteDAO dao = new ClienteDAO();
+                dao.excluirCliente(nome);
+                limparCampos();
+                JOptionPane.showMessageDialog(this, "Cliente exluído com sucesso");
+                atualizarTabela();
+            }
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void atualizarTabela() {
         ClienteDAO dao = new ClienteDAO();
