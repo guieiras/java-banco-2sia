@@ -209,6 +209,11 @@ public class formCliente extends javax.swing.JFrame {
                 "Nome", "Endereço", "Data de Nascimento", "Telefone"
             }
         ));
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabela);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -305,6 +310,9 @@ public class formCliente extends javax.swing.JFrame {
             Cliente cliente = new Cliente(nome, endereco, nascimento, fone, caminho);
             ClienteDAO dao = new ClienteDAO();
             dao.inserirCliente(cliente);
+            limparCampos();
+            JOptionPane.showMessageDialog(this, "Cliente inserido com sucesso");
+            atualizarTabela();
         }
         catch(ParseException ex) {
             JOptionPane.showMessageDialog(this, "Erro ao gerar data de nascimento\n" + ex);
@@ -316,7 +324,7 @@ public class formCliente extends javax.swing.JFrame {
         String nome = txtNome.getText();
         ClienteDAO dao = new ClienteDAO();
         Cliente cliente = dao.pesquisarCliente(nome);
-        if(cliente != null) {
+        if(cliente == null) {
             JOptionPane.showMessageDialog(this, "Não foram encontrados clientes com esse termo de pesquisa: '" + nome + "'");
         }
         else {
@@ -332,6 +340,9 @@ public class formCliente extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         atualizarTabela();
     }//GEN-LAST:event_formWindowOpened
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+    }//GEN-LAST:event_tabelaMouseClicked
 
     private void atualizarTabela() {
         ClienteDAO dao = new ClienteDAO();
@@ -349,6 +360,15 @@ public class formCliente extends javax.swing.JFrame {
         }
         TableModel modelo = new DefaultTableModel(matriz, colunas);
         tabela.setModel(modelo);
+    }
+    
+    private void limparCampos() {
+        txtNome.setText("");
+        txtEndereco.setText("");
+        txtNascimento.setText("");
+        txtFone.setText("");
+        ImageIcon imagem = new ImageIcon();
+        lblFoto.setIcon(imagem);        
     }
     
     /**
