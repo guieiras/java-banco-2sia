@@ -10,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ClienteDAO {
@@ -24,7 +22,7 @@ public class ClienteDAO {
         try {
             conexao = Conexao.getConnection();
             sql = "INSERT INTO POO_CLIENTE VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement p = conexao.prepareStatement(sql);
+            p = conexao.prepareStatement(sql);
             p.setString(1, cliente.getNome());
             p.setString(2, cliente.getEndereco());
             p.setDate(3, cliente.getNascimento());
@@ -64,16 +62,16 @@ public class ClienteDAO {
         conexao = Conexao.getConnection();
         sql = "SELECT * FROM POO_CLIENTE";
         try {
-            PreparedStatement p = conexao.prepareStatement(sql);
+            p = conexao.prepareStatement(sql);
             rs = p.executeQuery();
-            gerarLista(rs);
+            lista = gerarLista();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao pesquisar todos os clientes\n"+ex);
         }
         return lista;
     }
     
-    public List<Cliente> gerarLista(ResultSet rs) throws SQLException {
+    private List<Cliente> gerarLista() throws SQLException {
         List<Cliente> lista = new ArrayList<>();
         String nome, fone, endereco, caminho;
         Date nascimento;
@@ -87,6 +85,5 @@ public class ClienteDAO {
             lista.add(new Cliente(nome, endereco, nascimento, fone, caminho));
         }
         return lista;
-
     }
 }

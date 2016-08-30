@@ -10,6 +10,7 @@ import br.com.fiap.modelo.Cliente;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
@@ -321,6 +322,12 @@ public class formCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
+    private void atualizarTabela() {
+        ClienteDAO dao = new ClienteDAO();
+        List<Cliente> lista = dao.pesquisarTudo();
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
