@@ -342,6 +342,15 @@ public class formCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        int linha = tabela.getSelectedRow();
+        if(linha != -1) {
+            txtNome.setText(matriz[linha][0]);
+            txtEndereco.setText(matriz[linha][1]);
+            txtNascimento.setText(matriz[linha][2]);
+            txtFone.setText(matriz[linha][3]);
+            ImageIcon imagem = new ImageIcon(matriz[linha][4]);
+            lblFoto.setIcon(imagem);            
+        }
     }//GEN-LAST:event_tabelaMouseClicked
 
     private void atualizarTabela() {
