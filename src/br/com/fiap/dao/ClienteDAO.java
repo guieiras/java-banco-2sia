@@ -8,7 +8,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ClienteDAO {
@@ -54,5 +57,36 @@ public class ClienteDAO {
             JOptionPane.showMessageDialog(null, "Erro ao pesquisar cliente\n"+ex);
         }
         return cliente;
+    }
+    
+    public List<Cliente> pesquisarTudo() {
+        List<Cliente> lista = null;        
+        conexao = Conexao.getConnection();
+        sql = "SELECT * FROM POO_CLIENTE";
+        try {
+            PreparedStatement p = conexao.prepareStatement(sql);
+            rs = p.executeQuery();
+            gerarLista(rs);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao pesquisar todos os clientes\n"+ex);
+        }
+        return lista;
+    }
+    
+    public List<Cliente> gerarLista(ResultSet rs) throws SQLException {
+        List<Cliente> lista = new ArrayList<>();
+        String nome, fone, endereco, caminho;
+        Date nascimento;
+
+        while (rs.next()) {
+            nome = rs.getString("nome");
+            endereco = rs.getString("endereco");
+            nascimento = rs.getDate("nascimento");
+            fone = rs.getString("fone");
+            caminho = rs.getString("caminho");
+            lista.add(new Cliente(nome, endereco, nascimento, fone, caminho));
+        }
+        return lista;
+
     }
 }
