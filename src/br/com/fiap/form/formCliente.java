@@ -16,6 +16,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -24,7 +26,9 @@ import javax.swing.text.MaskFormatter;
  */
 public class formCliente extends javax.swing.JFrame {
     MaskFormatter mascaraNascimento, mascaraFone;
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
     String caminho;
+    String[][] matriz;
     /**
      * Creates new form formCliente
      */
@@ -292,7 +296,6 @@ public class formCliente extends javax.swing.JFrame {
         String endereco = txtEndereco.getText();
         String fone = txtFone.getText();
         try {
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             Date nascimento = new Date(formato.parse(txtNascimento.getText()).getTime());
             Cliente cliente = new Cliente(nome, endereco, nascimento, fone, caminho);
             ClienteDAO dao = new ClienteDAO();
@@ -314,7 +317,6 @@ public class formCliente extends javax.swing.JFrame {
         else {
             txtNome.setText(cliente.getNome());
             txtEndereco.setText(cliente.getEndereco());
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             txtNascimento.setText(formato.format(cliente.getNascimento()));
             txtFone.setText(cliente.getFone());
             ImageIcon imagem = new ImageIcon(cliente.getCaminho());
@@ -325,7 +327,19 @@ public class formCliente extends javax.swing.JFrame {
     private void atualizarTabela() {
         ClienteDAO dao = new ClienteDAO();
         List<Cliente> lista = dao.pesquisarTudo();
-        
+        matriz = new String[lista.size()][5];
+        Cliente cliente;
+        String[] colunas = {"Nome", "Endereço", "Data de Nascimento", "Telefone"};
+        for (int i = 0; i < lista.size(); i++) {
+            cliente = lista.get(i);
+            matriz[i][0] = cliente.getNome();
+            matriz[i][1] = cliente.getEndereco();
+            matriz[i][2] = formato.format(cliente.getNascimento());
+            matriz[i][3] = cliente.getFone();
+            matriz[i][4] = cliente.getCaminho();
+        }
+        TableModel modelo = new DefaultTableModel(matriz, colunas);
+        tabela.setModel(modelo);
     }
     
     /**
